@@ -13,6 +13,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        :root {
+            --primary: #ff5e62;
+            --secondary: #ff9966;
+            --accent: #ffd166;
+            --blue: #4facfe;
+            --teal: #00f2fe;
+            --green: #a8ff78;
+            --pink: #ff9de4;
+        }
+
         body {
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: white;
@@ -23,21 +33,23 @@
             justify-content: center;
             overflow: hidden;
             position: relative;
+            padding: 20px;
         }
 
         .container {
             text-align: center;
             z-index: 10;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             max-width: 900px;
             width: 95%;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.4);
             position: relative;
             overflow: hidden;
+            margin: auto;
         }
 
         .container::before {
@@ -47,17 +59,24 @@
             left: -10px;
             right: -10px;
             bottom: -10px;
-            background: linear-gradient(45deg, #ff9966, #ff5e62, #4facfe, #00f2fe, #ffd166);
+            background: linear-gradient(45deg, var(--secondary), var(--primary), var(--blue), var(--teal), var(--accent));
             z-index: -1;
-            filter: blur(20px);
+            filter: blur(25px);
             opacity: 0.3;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-            background: linear-gradient(to right, #ff9966, #ff5e62, #ffd166, #4facfe);
+            background: linear-gradient(to right, var(--secondary), var(--primary), var(--accent), var(--blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -73,20 +92,24 @@
             left: 10%;
             width: 80%;
             height: 3px;
-            background: linear-gradient(to right, transparent, #ff9966, #ff5e62, transparent);
+            background: linear-gradient(to right, transparent, var(--secondary), var(--primary), transparent);
+        }
+
+        .year-container {
+            position: relative;
+            margin: 1.5rem 0;
         }
 
         .year {
-            font-size: 10rem;
+            font-size: 8rem;
             font-weight: bold;
-            margin: 2rem 0;
-            background: linear-gradient(to right, #ff9966, #ff5e62, #ffd166);
+            background: linear-gradient(to right, var(--secondary), var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 30px rgba(255, 94, 98, 0.7);
             animation: pulse 2s infinite, glow 3s infinite alternate;
-            position: relative;
+            line-height: 1;
         }
 
         @keyframes pulse {
@@ -100,19 +123,29 @@
             to { text-shadow: 0 0 40px rgba(255, 215, 0, 0.9), 0 0 60px rgba(255, 94, 98, 0.7); }
         }
 
+        .clock {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin: 3rem 0;
+            gap: 1.5rem;
+            margin: 2rem 0;
             flex-wrap: wrap;
         }
 
         .countdown-item {
             background: rgba(255, 255, 255, 0.1);
-            padding: 2rem 1.5rem;
+            padding: 1.5rem 1rem;
             border-radius: 15px;
-            min-width: 150px;
+            min-width: 130px;
             backdrop-filter: blur(5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
@@ -122,7 +155,7 @@
         }
 
         .countdown-item:hover {
-            transform: translateY(-15px) scale(1.05);
+            transform: translateY(-10px) scale(1.05);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             background: rgba(255, 255, 255, 0.15);
         }
@@ -143,27 +176,129 @@
         }
 
         .countdown-number {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: bold;
             display: block;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         .countdown-label {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-top: 0.5rem;
             display: block;
-            color: #ffd166;
+            color: var(--accent);
+        }
+
+        .message-container {
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
         }
 
         .message {
-            font-size: 1.8rem;
-            margin: 2rem 0;
+            font-size: 1.6rem;
             opacity: 0.9;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            min-height: 60px;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .new-year-message {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            background: linear-gradient(to right, var(--secondary), var(--primary), var(--accent), var(--blue), var(--teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 94, 98, 0.5);
+            animation: glow 1.5s ease-in-out infinite alternate, bounce 2s infinite;
+            margin: 1rem 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .resolution-form {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .resolution-form h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .resolution-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .resolution-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .resolution-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .resolution-display {
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--accent);
+            min-height: 30px;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .fireworks {
@@ -172,6 +307,8 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            top: 0;
+            left: 0;
         }
 
         .firework {
@@ -189,37 +326,20 @@
             opacity: 0;
         }
 
-        .new-year-message {
-            font-size: 5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 2rem;
-            display: none;
-            background: linear-gradient(to right, #ff9966, #ff5e62, #ffd166, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(255, 94, 98, 0.5);
-            animation: glow 1.5s ease-in-out infinite alternate, bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
         .celebration-effects {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 2;
+            top: 0;
+            left: 0;
         }
 
         .balloon {
             position: absolute;
-            width: 50px;
-            height: 60px;
+            width: 40px;
+            height: 50px;
             border-radius: 50%;
             bottom: -100px;
             animation: float 15s linear infinite;
@@ -229,9 +349,9 @@
             content: '';
             position: absolute;
             width: 2px;
-            height: 80px;
+            height: 60px;
             background: rgba(255, 255, 255, 0.7);
-            top: 60px;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -243,11 +363,11 @@
 
         .music-control {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             background: rgba(255, 255, 255, 0.2);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -265,83 +385,18 @@
         }
 
         .music-control i {
-            font-size: 1.8rem;
-            color: white;
-        }
-
-        .resolution-form {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        .resolution-form h3 {
-            margin-bottom: 1rem;
-            color: #ffd166;
-        }
-
-        .resolution-input {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 10px;
-            border: none;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .resolution-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .submit-btn {
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            border: none;
-            background: linear-gradient(to right, #ff9966, #ff5e62);
-            color: white;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .resolution-display {
-            margin-top: 1.5rem;
-            font-style: italic;
-            color: #ffd166;
-            min-height: 30px;
-        }
-
-        .clock {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #ffd166;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            color: white;
         }
 
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
             
             .year {
-                font-size: 6rem;
+                font-size: 5rem;
             }
             
             .countdown {
@@ -349,20 +404,64 @@
             }
             
             .countdown-item {
-                min-width: 120px;
-                padding: 1.5rem 1rem;
+                min-width: 100px;
+                padding: 1rem 0.5rem;
             }
             
             .countdown-number {
                 font-size: 2.5rem;
             }
             
+            .countdown-label {
+                font-size: 0.9rem;
+            }
+            
             .new-year-message {
-                font-size: 3rem;
+                font-size: 2.5rem;
+            }
+            
+            .message {
+                font-size: 1.3rem;
             }
             
             .resolution-form {
-                width: 95%;
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .year {
+                font-size: 4rem;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 0.8rem 0.3rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .new-year-message {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -376,7 +475,9 @@
             <span id="currentTime">Loading...</span>
         </div>
         
-        <div class="year" id="nextYear">2024</div>
+        <div class="year-container">
+            <div class="year" id="nextYear">2024</div>
+        </div>
         
         <div class="countdown">
             <div class="countdown-item">
@@ -397,8 +498,10 @@
             </div>
         </div>
         
-        <div class="message" id="message">Get ready to celebrate! The party starts soon!</div>
-        <div class="new-year-message" id="newYearMessage">Happy New Year!</div>
+        <div class="message-container">
+            <div class="message" id="message">Get ready to celebrate! The party starts soon!</div>
+            <div class="new-year-message" id="newYearMessage">Happy New Year!</div>
+        </div>
         
         <div class="resolution-form">
             <h3><i class="fas fa-star"></i> Your New Year's Resolution <i class="fas fa-star"></i></h3>
@@ -480,7 +583,7 @@
             const fireworksContainer = document.getElementById('fireworks');
             const colors = ['#ff5e62', '#ff9966', '#4facfe', '#00f2fe', '#ffd166', '#a8ff78', '#ff9de4'];
             
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 120; i++) {
                 setTimeout(() => {
                     const firework = document.createElement('div');
                     firework.className = 'firework';
@@ -500,7 +603,7 @@
                             }
                         }, 1000);
                     }, 100);
-                }, i * 150);
+                }, i * 200);
             }
             
             // Create confetti
@@ -513,7 +616,7 @@
             const colors = ['#ff5e62', '#ff9966', '#4facfe', '#00f2fe', '#ffd166', '#a8ff78', '#ff9de4'];
             const shapes = ['circle', 'square', 'triangle'];
             
-            for (let i = 0; i < 200; i++) {
+            for (let i = 0; i < 150; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
@@ -549,7 +652,7 @@
                             fireworksContainer.removeChild(confetti);
                         }
                     };
-                }, i * 100);
+                }, i * 150);
             }
         }
         
@@ -558,7 +661,7 @@
             const celebrationContainer = document.getElementById('celebration');
             const colors = ['#ff5e62', '#ff9966', '#4facfe', '#00f2fe', '#ffd166', '#a8ff78', '#ff9de4'];
             
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 25; i++) {
                 setTimeout(() => {
                     const balloon = document.createElement('div');
                     balloon.className = 'balloon';
@@ -573,7 +676,7 @@
                             celebrationContainer.removeChild(balloon);
                         }
                     }, 16000);
-                }, i * 500);
+                }, i * 600);
             }
         }
         
@@ -587,14 +690,14 @@
                 audio.pause();
                 musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
             } else {
-                audio.play();
+                audio.play().catch(e => console.log("Audio play failed:", e));
                 musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
             }
             isPlaying = !isPlaying;
         });
         
         function playAudio() {
-            audio.play();
+            audio.play().catch(e => console.log("Audio play failed:", e));
             musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
             isPlaying = true;
         }
@@ -615,11 +718,17 @@
             }
         });
         
+        resolutionInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitResolution.click();
+            }
+        });
+        
         function createMiniCelebration() {
             const celebrationContainer = document.getElementById('celebration');
             const colors = ['#ff5e62', '#ff9966', '#4facfe', '#00f2fe', '#ffd166'];
             
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 8; i++) {
                 setTimeout(() => {
                     const miniFirework = document.createElement('div');
                     miniFirework.className = 'firework';
